@@ -19,7 +19,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
+            - ~/app/node_modules
       - run:
           name: Run tests
           command: yarn test
