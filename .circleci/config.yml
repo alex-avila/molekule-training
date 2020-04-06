@@ -34,7 +34,7 @@ jobs:
             sudo pip install awsebcli --upgrade
       - deploy:
           name: Deploy
-          command: eb deploy $CIRCLE_BRANCH-my-applicatio
+          command: eb deploy $CIRCLE_BRANCH-env
       - store_artifacts:
           path: test-results.xml
           prefix: tests
