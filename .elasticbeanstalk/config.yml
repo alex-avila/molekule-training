@@ -1,0 +1,9 @@
+branch-defaults:
+  master:
+    environment: master-env
+global:
+  application_name: molekule-training
+  default_ec2_keyname: e-3mizpnmwrp
+  default_platform: Node.js running on 64bit Amazon Linux/4.14.1
+  default_region: us-east-2
+  sc: git
