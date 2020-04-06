@@ -1,8 +1,52 @@
+# Configuration based on these articles:
+# https://circleci.com/blog/automate-your-nuxt-js-app-deployment/
+# https://gist.github.com/ryansimms/808214137d219be649e010a07af44bad
+# https://dev.to/jkichler/a-beginners-guide-for-configuring-an-aws-elastic-beanstalk-node-application-for-circle-ci-deployment-with-github-52n1
+
 version: 2.1
 jobs:
-  build:
+  build_and_deploy:
     docker:
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+      - image: circleci/node:lts
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install app dependencies
+          command: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Run tests
+          command: yarn test
+      - run:
+          name: Install deployment dependencies
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install --upgrade setuptools
+            sudo pip install awsebcli --upgrade
+      - deploy:
+          name: Deploy
+          command: eb deploy $CIRCLE_BRANCH-my-applicatio
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_test_results:
+          path: test-results.xml
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build_and_deploy:
+          filters:
+            branches:
+              only:
+                - master
