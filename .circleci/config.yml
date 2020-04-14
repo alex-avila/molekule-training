@@ -35,7 +35,7 @@ jobs:
             sudo pip install brotli awscli awsebcli --upgrade
       - deploy:
           name: Deploy
-          command: './.circleci/deploy.sh'
+          command: bash .circleci/deploy.sh
 
 workflows:
   version: 2.1
