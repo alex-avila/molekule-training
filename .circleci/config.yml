@@ -30,9 +30,9 @@ jobs:
           name: Install deployment dependencies
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get install python-pip python-dev build-essential
+            sudo apt-get install python-pip python-dev build-essential brotli
             sudo pip install --upgrade setuptools
-            sudo pip install brotli awscli awsebcli --upgrade
+            sudo pip install awscli awsebcli --upgrade
       - deploy:
           name: Deploy
           command: bash .circleci/deploy.sh
