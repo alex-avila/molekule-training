@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
+echo "Start deploy"
+
 # Compress static files with gzip and brotli
 # https://blog.e-kursy.it/aws-lambda-edge-brotli/
 # https://medium.com/@felice.geracitano/brotli-compression-delivered-from-aws-7be5b467c2e1
