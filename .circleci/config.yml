@@ -30,7 +30,7 @@ jobs:
           name: Install deployment dependencies
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get install python-pip python-dev build-essential brotli
+            sudo apt-get install python-pip python-dev build-essential rsync brotli jq
             sudo pip install --upgrade setuptools
             sudo pip install awscli awsebcli --upgrade
       - deploy:
