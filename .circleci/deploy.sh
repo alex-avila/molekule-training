@@ -11,7 +11,7 @@ echo $PWD
 find -L ./client -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.woff' -o -name '*.woff2' \
  | xargs -n 1 -I {} sh -c 'mkdir -p ./gz/`dirname $1` && cp {} ./gz/{} && gzip --best ./gz/{} && mv ./gz/{}.gz ./gz/{}' sh {}
 find -L ./client -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.woff' -o -name '*.woff2' \
- | xargs -n 1 -I {} sh -c 'mkdir -p ./br/`dirname $1` && cp {} ./br/{} && brotli -f --best ./br/{} && mv ./br/{}.br ./br/{}' sh {}
+ -exec mkdir -p ./br/client \; -exec cp {} ./br/{} \; -exec brotli -f --best ./br/{} \; -exec mv ./br/{}.br ./br/{} \;
 cd ../..
 
 aws s3 cp --recursive --cache-control 'public, max-age=31536000' ./.nuxt/dist/client s3://elasticbeanstalk-us-east-2-110898720018/${CIRCLE_TAG}/_nuxt/
