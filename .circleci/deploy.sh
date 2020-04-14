@@ -10,7 +10,7 @@ cd ./.nuxt/dist/
 echo $PWD
 find -L ./client -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.woff' -o -name '*.woff2' \
  | xargs -n 1 -I {} sh -c 'mkdir -p ./gz/`dirname $1` && cp {} ./gz/{} && gzip --best ./gz/{} && mv ./gz/{}.gz ./gz/{}' sh {}
-find -L ./client -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.woff' -o -name '*.woff2' \
+find -L ./client \( -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.woff' -o -name '*.woff2' \) \
  -exec mkdir -p ./br/client \; -exec cp {} ./br/{} \; -exec brotli -f --best ./br/{} \; -exec mv ./br/{}.br ./br/{} \;
 cd ../..
 
