@@ -12,7 +12,7 @@
         <b class="has-text-grey">
           Every
         </b>
-        component is responsive
+        component is responsive.
       </card>
 
       <card title="Modern" icon="alert-decagram">
@@ -22,12 +22,12 @@
         </a>
         and
         <a href="http://bulma.io/">
-          Bulma
+          Bulma.
         </a>
       </card>
 
       <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
+        No other internal dependency.
       </card>
     </div>
   </section>
